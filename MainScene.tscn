@@ -1,0 +1,297 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Map.tscn" type="PackedScene" id=2]
+[ext_resource path="res://DawnTiles35px.jpg" type="Texture" id=4]
+[ext_resource path="res://ScreenShot.gd" type="Script" id=5]
+[ext_resource path="res://ZoomingCamera2D.gd" type="Script" id=6]
+
+[sub_resource type="TileSet" id=1]
+0/name = "DawnTiles35px.jpg 0"
+0/texture = ExtResource( 4 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 35, 35, 35, 35 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [  ]
+0/z_index = 0
+1/name = "DawnTiles35px.jpg 1"
+1/texture = ExtResource( 4 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 175, 35, 35, 35 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shapes = [  ]
+1/z_index = 0
+2/name = "DawnTiles35px.jpg 2"
+2/texture = ExtResource( 4 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 105, 245, 35, 35 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shapes = [  ]
+2/z_index = 0
+3/name = "DawnTiles35px.jpg 3"
+3/texture = ExtResource( 4 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 35, 105, 35, 35 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shapes = [  ]
+3/z_index = 0
+4/name = "DawnTiles35px.jpg 4"
+4/texture = ExtResource( 4 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 35, 245, 35, 35 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shapes = [  ]
+4/z_index = 0
+5/name = "DawnTiles35px.jpg 5"
+5/texture = ExtResource( 4 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 105, 105, 35, 35 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shapes = [  ]
+5/z_index = 0
+6/name = "DawnTiles35px.jpg 6"
+6/texture = ExtResource( 4 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 35, 175, 35, 35 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shapes = [  ]
+6/z_index = 0
+7/name = "DawnTiles35px.jpg 7"
+7/texture = ExtResource( 4 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 105, 35, 35, 35 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shapes = [  ]
+7/z_index = 0
+8/name = "DawnTiles35px.jpg 8"
+8/texture = ExtResource( 4 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 175, 175, 35, 35 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shapes = [  ]
+8/z_index = 0
+9/name = "DawnTiles35px.jpg 9"
+9/texture = ExtResource( 4 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 105, 175, 35, 35 )
+9/tile_mode = 0
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shapes = [  ]
+9/z_index = 0
+
+[node name="MainScene" type="Node2D"]
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+margin_right = 3500.0
+margin_bottom = 3500.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ViewportContainer"]
+
+[node name="GridContainer" type="GridContainer" parent="ViewportContainer/CanvasLayer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 328.0
+margin_bottom = 220.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Octaves_Label" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_top = 5.0
+margin_right = 131.0
+margin_bottom = 19.0
+text = "Octaves"
+
+[node name="SpinBox_Octaves" type="SpinBox" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_left = 135.0
+margin_right = 308.0
+margin_bottom = 24.0
+max_value = 9.0
+value = 3.0
+
+[node name="Period_Label" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_top = 33.0
+margin_right = 131.0
+margin_bottom = 47.0
+text = "Period"
+
+[node name="SpinBox_Period" type="SpinBox" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_left = 135.0
+margin_top = 28.0
+margin_right = 308.0
+margin_bottom = 52.0
+value = 50.0
+
+[node name="Persistance_Label" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_top = 61.0
+margin_right = 131.0
+margin_bottom = 75.0
+text = "Persistance"
+
+[node name="SpinBox_Persistance" type="SpinBox" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_left = 135.0
+margin_top = 56.0
+margin_right = 308.0
+margin_bottom = 80.0
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="Lacunarity_Label" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_top = 89.0
+margin_right = 131.0
+margin_bottom = 103.0
+text = "Lacunarity"
+
+[node name="SpinBox_Lacunarity" type="SpinBox" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_left = 135.0
+margin_top = 84.0
+margin_right = 308.0
+margin_bottom = 108.0
+min_value = -100.0
+step = 0.1
+value = -3.5
+
+[node name="ElevPower_Label" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_top = 117.0
+margin_right = 131.0
+margin_bottom = 131.0
+text = "Elev. Power"
+
+[node name="SpinBox_ElevPower" type="SpinBox" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_left = 135.0
+margin_top = 112.0
+margin_right = 308.0
+margin_bottom = 136.0
+max_value = 10.0
+step = 0.1
+value = 1.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resolution" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_top = 145.0
+margin_right = 131.0
+margin_bottom = 159.0
+text = "Resolution (tiles)"
+
+[node name="SpinBox_Size" type="SpinBox" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_left = 135.0
+margin_top = 140.0
+margin_right = 308.0
+margin_bottom = 164.0
+min_value = 10.0
+max_value = 500.0
+step = 10.0
+value = 100.0
+
+[node name="LandSize_Label" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_top = 171.0
+margin_right = 131.0
+margin_bottom = 185.0
+text = "Land Size"
+
+[node name="ItemList_LandSize" type="OptionButton" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_left = 135.0
+margin_top = 168.0
+margin_right = 308.0
+margin_bottom = 188.0
+text = "Large"
+items = [ "Huge", null, false, 0, false, "Large", null, false, 0, false, "Medium", null, false, 0, false, "Small", null, false, 0, false, "Tiny", null, false, 0, false ]
+selected = 1
+
+[node name="Image_Save_Location" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_top = 197.0
+margin_right = 131.0
+margin_bottom = 211.0
+text = "Image Save Location"
+
+[node name="LineEdit_Path" type="LineEdit" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_left = 135.0
+margin_top = 192.0
+margin_right = 308.0
+margin_bottom = 216.0
+text = "E:/D&D/Dawn Of Worlds/"
+expand_to_text_length = true
+
+[node name="MpT_Label" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_top = 220.0
+margin_right = 131.0
+margin_bottom = 234.0
+text = "Mi/Tile:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MpT_Display" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_left = 135.0
+margin_top = 220.0
+margin_right = 308.0
+margin_bottom = 234.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Directions" type="Label" parent="ViewportContainer/CanvasLayer"]
+margin_left = 24.6401
+margin_top = 296.613
+margin_right = 344.64
+margin_bottom = 391.613
+text = "Press Ctrl-m to generate a new map
+
+Press Ctrl-p to save a map to a .PNG file
+
+Mousewheel zooms in and out"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mapviewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 3500, 3500 )
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+script = ExtResource( 5 )
+
+[node name="TileMap" parent="ViewportContainer/Mapviewport" instance=ExtResource( 2 )]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 35, 35 )
+
+[node name="Camera2D" type="Camera2D" parent="ViewportContainer"]
+position = Vector2( -0.65527, 0.849731 )
+anchor_mode = 0
+current = true
+script = ExtResource( 6 )
