@@ -110,8 +110,6 @@
 [node name="MainScene" type="Node2D"]
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
-margin_right = 3500.0
-margin_bottom = 3500.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -121,8 +119,8 @@ __meta__ = {
 [node name="GridContainer" type="GridContainer" parent="ViewportContainer/CanvasLayer"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 328.0
-margin_bottom = 220.0
+margin_right = 330.0
+margin_bottom = 280.0
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -233,24 +231,40 @@ text = "Large"
 items = [ "Huge", null, false, 0, false, "Large", null, false, 0, false, "Medium", null, false, 0, false, "Small", null, false, 0, false, "Tiny", null, false, 0, false ]
 selected = 1
 
-[node name="Image_Save_Location" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
-margin_top = 197.0
+[node name="Climate" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_top = 193.0
 margin_right = 131.0
-margin_bottom = 211.0
+margin_bottom = 207.0
+text = "Climate"
+
+[node name="HSlider" type="HSlider" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_left = 135.0
+margin_top = 192.0
+margin_right = 308.0
+margin_bottom = 208.0
+max_value = 1.0
+step = 0.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Image_Save_Location" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
+margin_top = 217.0
+margin_right = 131.0
+margin_bottom = 231.0
 text = "Image Save Location"
 
 [node name="LineEdit_Path" type="LineEdit" parent="ViewportContainer/CanvasLayer/GridContainer"]
 margin_left = 135.0
-margin_top = 192.0
+margin_top = 212.0
 margin_right = 308.0
-margin_bottom = 216.0
+margin_bottom = 236.0
 text = "E:/D&D/Dawn Of Worlds/"
 expand_to_text_length = true
 
 [node name="MpT_Label" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
-margin_top = 220.0
+margin_top = 240.0
 margin_right = 131.0
-margin_bottom = 234.0
+margin_bottom = 254.0
 text = "Mi/Tile:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -258,18 +272,18 @@ __meta__ = {
 
 [node name="MpT_Display" type="Label" parent="ViewportContainer/CanvasLayer/GridContainer"]
 margin_left = 135.0
-margin_top = 220.0
+margin_top = 240.0
 margin_right = 308.0
-margin_bottom = 234.0
+margin_bottom = 254.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Directions" type="Label" parent="ViewportContainer/CanvasLayer"]
-margin_left = 24.6401
-margin_top = 296.613
-margin_right = 344.64
-margin_bottom = 391.613
+margin_left = 20.0
+margin_top = 300.0
+margin_right = 340.0
+margin_bottom = 395.0
 text = "Press Ctrl-m to generate a new map
 
 Press Ctrl-p to save a map to a .PNG file
@@ -278,6 +292,30 @@ Mousewheel zooms in and out"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GridContainer2" type="GridContainer" parent="ViewportContainer/CanvasLayer"]
+margin_left = 20.0
+margin_top = 400.0
+margin_right = 122.0
+margin_bottom = 420.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Create" type="Button" parent="ViewportContainer/CanvasLayer/GridContainer2"]
+margin_right = 57.0
+margin_bottom = 20.0
+text = "Create!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonSave" type="Button" parent="ViewportContainer/CanvasLayer/GridContainer2"]
+margin_left = 61.0
+margin_right = 102.0
+margin_bottom = 20.0
+text = "Save"
 
 [node name="Mapviewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 3500, 3500 )
@@ -289,9 +327,12 @@ script = ExtResource( 5 )
 [node name="TileMap" parent="ViewportContainer/Mapviewport" instance=ExtResource( 2 )]
 tile_set = SubResource( 1 )
 cell_size = Vector2( 35, 35 )
+tile_data = PoolIntArray( 65525, 0, 0 )
 
-[node name="Camera2D" type="Camera2D" parent="ViewportContainer"]
+[node name="Camera2D" type="Camera2D" parent="ViewportContainer/Mapviewport"]
 position = Vector2( -0.65527, 0.849731 )
 anchor_mode = 0
 current = true
 script = ExtResource( 6 )
+[connection signal="pressed" from="ViewportContainer/CanvasLayer/GridContainer2/Button_Create" to="ViewportContainer/Mapviewport/TileMap" method="_on_Button_Create_pressed"]
+[connection signal="pressed" from="ViewportContainer/CanvasLayer/GridContainer2/ButtonSave" to="ViewportContainer/Mapviewport" method="_on_ButtonSave_pressed"]

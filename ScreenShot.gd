@@ -6,10 +6,15 @@ onready var output_path = get_node("../CanvasLayer/GridContainer/LineEdit_Path")
 
 func _ready():
 	pass
-		
+
+
 func _input(event):
 	if event.is_action_pressed("capture_image"):
 		make_screenshot()
+
+func _on_ButtonSave_pressed():
+	make_screenshot()
+
 
 func make_screenshot():
 	var image = get_viewport().get_texture().get_data()
@@ -42,3 +47,5 @@ func set_shortcut_action(action):
 func set_output_path(path):
 	_check_path(path)
 	output_path = path
+
+
