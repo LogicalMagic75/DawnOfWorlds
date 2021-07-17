@@ -7,6 +7,7 @@ var elevation = []
 var moisture =[]
 var r_lat =[]
 
+const ui_path = "/root/MainScene/CanvasLayer/GridContainer/"
 
 func _ready():
 	pass
@@ -20,24 +21,24 @@ func _input(event):
 	if event is InputEventMouseButton:
 		var mouse_pos = get_viewport().get_mouse_position()
 		var tile_pos = map_to_world(world_to_map(mouse_pos))
-		print(get_cellv(tile_pos))
+		print(tile_pos)
 
 func make_map():
 	#get vars
-	var map_size = get_node("/root/MainScene/ViewportContainer/CanvasLayer/GridContainer/SpinBox_Size").value
-	var octaves = get_node("/root/MainScene/ViewportContainer/CanvasLayer/GridContainer/SpinBox_Octaves").value
-	var period = get_node("/root/MainScene/ViewportContainer/CanvasLayer/GridContainer/SpinBox_Period").value
-	var persistance = get_node("/root/MainScene/ViewportContainer/CanvasLayer/GridContainer/SpinBox_Persistance").value
-	var lacunarity = get_node("/root/MainScene/ViewportContainer/CanvasLayer/GridContainer/SpinBox_Lacunarity").value
-	var ElPower = get_node("/root/MainScene/ViewportContainer/CanvasLayer/GridContainer/SpinBox_ElevPower").value
-	var landsizeselected = get_node("/root/MainScene/ViewportContainer/CanvasLayer/GridContainer/ItemList_LandSize").selected
-	var climate = $"/root/MainScene/ViewportContainer/CanvasLayer/GridContainer/HSlider".value
+	var map_size = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Size").value
+	var octaves = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Octaves").value
+	var period = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Period").value
+	var persistance = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Persistance").value
+	var lacunarity = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Lacunarity").value
+	var ElPower = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_ElevPower").value
+	var landsizeselected = get_node("/root/MainScene/CanvasLayer/GridContainer/ItemList_LandSize").selected
+	var climate = $"/root/MainScene/CanvasLayer/GridContainer/HSlider".value
 	var landarray = [72, 29,14,7,3]
 	var landsize = landarray[landsizeselected] 
 	var latPtile = landsize/map_size
 	var latadj = (180-landsize)*climate
 	var MpT = round(latPtile*69)
-	get_node("/root/MainScene/ViewportContainer/CanvasLayer/GridContainer/MpT_Display").text = var2str(MpT)
+	get_node("/root/MainScene/CanvasLayer/GridContainer/MpT_Display").text = var2str(MpT)
 
 
 	noise.seed = randi()
