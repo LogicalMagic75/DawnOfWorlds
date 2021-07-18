@@ -6,9 +6,9 @@
 
 [node name="MainScene" type="Node2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+[node name="MapOptions" type="GridContainer" parent="UI"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 330.0
@@ -18,39 +18,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Octaves_Label" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="Octaves_Label" type="Label" parent="UI/MapOptions"]
 margin_top = 5.0
 margin_right = 131.0
 margin_bottom = 19.0
 text = "Octaves"
 
-[node name="SpinBox_Octaves" type="SpinBox" parent="CanvasLayer/GridContainer"]
+[node name="SpinBox_Octaves" type="SpinBox" parent="UI/MapOptions"]
 margin_left = 135.0
 margin_right = 308.0
 margin_bottom = 24.0
 max_value = 9.0
 value = 3.0
 
-[node name="Period_Label" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="Period_Label" type="Label" parent="UI/MapOptions"]
 margin_top = 33.0
 margin_right = 131.0
 margin_bottom = 47.0
 text = "Period"
 
-[node name="SpinBox_Period" type="SpinBox" parent="CanvasLayer/GridContainer"]
+[node name="SpinBox_Period" type="SpinBox" parent="UI/MapOptions"]
 margin_left = 135.0
 margin_top = 28.0
 margin_right = 308.0
 margin_bottom = 52.0
 value = 40.0
 
-[node name="Persistance_Label" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="Persistance_Label" type="Label" parent="UI/MapOptions"]
 margin_top = 61.0
 margin_right = 131.0
 margin_bottom = 75.0
 text = "Persistance"
 
-[node name="SpinBox_Persistance" type="SpinBox" parent="CanvasLayer/GridContainer"]
+[node name="SpinBox_Persistance" type="SpinBox" parent="UI/MapOptions"]
 margin_left = 135.0
 margin_top = 56.0
 margin_right = 308.0
@@ -59,13 +59,13 @@ max_value = 1.0
 step = 0.1
 value = 0.3
 
-[node name="Lacunarity_Label" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="Lacunarity_Label" type="Label" parent="UI/MapOptions"]
 margin_top = 89.0
 margin_right = 131.0
 margin_bottom = 103.0
 text = "Lacunarity"
 
-[node name="SpinBox_Lacunarity" type="SpinBox" parent="CanvasLayer/GridContainer"]
+[node name="SpinBox_Lacunarity" type="SpinBox" parent="UI/MapOptions"]
 margin_left = 135.0
 margin_top = 84.0
 margin_right = 308.0
@@ -74,13 +74,13 @@ min_value = -100.0
 step = 0.1
 value = -5.5
 
-[node name="ElevPower_Label" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="ElevPower_Label" type="Label" parent="UI/MapOptions"]
 margin_top = 115.0
 margin_right = 131.0
 margin_bottom = 129.0
 text = "Elev. Power"
 
-[node name="optbutton_ElevPower" type="OptionButton" parent="CanvasLayer/GridContainer"]
+[node name="optbutton_ElevPower" type="OptionButton" parent="UI/MapOptions"]
 margin_left = 135.0
 margin_top = 112.0
 margin_right = 308.0
@@ -89,13 +89,13 @@ text = "3"
 items = [ "1", null, false, 1, null, "3", null, false, 3, null, "5", null, false, 5, null, "7", null, false, 7, null, "9", null, false, 9, null ]
 selected = 1
 
-[node name="Resolution" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="Resolution" type="Label" parent="UI/MapOptions"]
 margin_top = 141.0
 margin_right = 131.0
 margin_bottom = 155.0
 text = "Resolution (tiles)"
 
-[node name="SpinBox_Size" type="SpinBox" parent="CanvasLayer/GridContainer"]
+[node name="SpinBox_Size" type="SpinBox" parent="UI/MapOptions"]
 margin_left = 135.0
 margin_top = 136.0
 margin_right = 308.0
@@ -105,13 +105,13 @@ max_value = 500.0
 step = 10.0
 value = 100.0
 
-[node name="LandSize_Label" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="LandSize_Label" type="Label" parent="UI/MapOptions"]
 margin_top = 167.0
 margin_right = 131.0
 margin_bottom = 181.0
 text = "Land Size"
 
-[node name="ItemList_LandSize" type="OptionButton" parent="CanvasLayer/GridContainer"]
+[node name="ItemList_LandSize" type="OptionButton" parent="UI/MapOptions"]
 margin_left = 135.0
 margin_top = 164.0
 margin_right = 308.0
@@ -120,13 +120,13 @@ text = "Large"
 items = [ "Huge", null, false, 0, false, "Large", null, false, 0, false, "Medium", null, false, 0, false, "Small", null, false, 0, false, "Tiny", null, false, 0, false ]
 selected = 1
 
-[node name="Climate" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="Climate" type="Label" parent="UI/MapOptions"]
 margin_top = 189.0
 margin_right = 131.0
 margin_bottom = 203.0
 text = "Climate"
 
-[node name="Climate_HSlider" type="HSlider" parent="CanvasLayer/GridContainer"]
+[node name="Climate_HSlider" type="HSlider" parent="UI/MapOptions"]
 margin_left = 135.0
 margin_top = 188.0
 margin_right = 308.0
@@ -137,13 +137,13 @@ value = 0.5
 tick_count = 5
 ticks_on_borders = true
 
-[node name="SeaLevel_Label" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="SeaLevel_Label" type="Label" parent="UI/MapOptions"]
 margin_top = 209.0
 margin_right = 131.0
 margin_bottom = 223.0
 text = "Sea Level"
 
-[node name="SeaLevel_HSlider" type="HSlider" parent="CanvasLayer/GridContainer"]
+[node name="SeaLevel_HSlider" type="HSlider" parent="UI/MapOptions"]
 margin_left = 135.0
 margin_top = 208.0
 margin_right = 308.0
@@ -154,13 +154,13 @@ step = 0.0
 tick_count = 5
 ticks_on_borders = true
 
-[node name="Image_Save_Location" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="Image_Save_Location" type="Label" parent="UI/MapOptions"]
 margin_top = 233.0
 margin_right = 131.0
 margin_bottom = 247.0
 text = "Image Save Location"
 
-[node name="LineEdit_Path" type="LineEdit" parent="CanvasLayer/GridContainer"]
+[node name="LineEdit_Path" type="LineEdit" parent="UI/MapOptions"]
 margin_left = 135.0
 margin_top = 228.0
 margin_right = 308.0
@@ -168,7 +168,7 @@ margin_bottom = 252.0
 text = "E:/D&D/Dawn Of Worlds/"
 expand_to_text_length = true
 
-[node name="MpT_Label" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="MpT_Label" type="Label" parent="UI/MapOptions"]
 margin_top = 256.0
 margin_right = 131.0
 margin_bottom = 270.0
@@ -177,7 +177,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MpT_Display" type="Label" parent="CanvasLayer/GridContainer"]
+[node name="MpT_Display" type="Label" parent="UI/MapOptions"]
 margin_left = 135.0
 margin_top = 256.0
 margin_right = 308.0
@@ -186,7 +186,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Directions" type="Label" parent="CanvasLayer"]
+[node name="Directions" type="Label" parent="UI"]
 margin_left = 20.0
 margin_top = 300.0
 margin_right = 340.0
@@ -200,7 +200,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer2" type="GridContainer" parent="CanvasLayer"]
+[node name="GridContainer2" type="GridContainer" parent="UI"]
 margin_left = 20.0
 margin_top = 400.0
 margin_right = 122.0
@@ -210,7 +210,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Create" type="Button" parent="CanvasLayer/GridContainer2"]
+[node name="Button_Create" type="Button" parent="UI/GridContainer2"]
 margin_right = 57.0
 margin_bottom = 20.0
 text = "Create!"
@@ -218,13 +218,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonSave" type="Button" parent="CanvasLayer/GridContainer2"]
+[node name="ButtonSave" type="Button" parent="UI/GridContainer2"]
 margin_left = 61.0
 margin_right = 102.0
 margin_bottom = 20.0
 text = "Save"
 
-[node name="TileReadout" type="GridContainer" parent="CanvasLayer"]
+[node name="TileReadout" type="GridContainer" parent="UI"]
 margin_left = 31.0
 margin_top = 455.0
 margin_right = 318.0
@@ -234,39 +234,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="elevation_label" type="Label" parent="CanvasLayer/TileReadout"]
+[node name="noise_Label" type="Label" parent="UI/TileReadout"]
 margin_right = 86.0
 margin_bottom = 14.0
+text = "Noise value:"
+
+[node name="noise_reading" type="Label" parent="UI/TileReadout"]
+margin_left = 90.0
+margin_right = 90.0
+margin_bottom = 14.0
+
+[node name="elevation_label" type="Label" parent="UI/TileReadout"]
+margin_top = 18.0
+margin_right = 86.0
+margin_bottom = 32.0
 text = "Elevation:"
 
-[node name="elevation_reading" type="Label" parent="CanvasLayer/TileReadout"]
+[node name="elevation_reading" type="Label" parent="UI/TileReadout"]
 margin_left = 90.0
-margin_right = 90.0
-margin_bottom = 14.0
-
-[node name="temp_label" type="Label" parent="CanvasLayer/TileReadout"]
 margin_top = 18.0
-margin_right = 86.0
+margin_right = 90.0
 margin_bottom = 32.0
+
+[node name="temp_label" type="Label" parent="UI/TileReadout"]
+margin_top = 36.0
+margin_right = 86.0
+margin_bottom = 50.0
 text = "Temperature:"
 
-[node name="temp_reading" type="Label" parent="CanvasLayer/TileReadout"]
+[node name="temp_reading" type="Label" parent="UI/TileReadout"]
 margin_left = 90.0
-margin_top = 18.0
-margin_right = 90.0
-margin_bottom = 32.0
-
-[node name="moist_label" type="Label" parent="CanvasLayer/TileReadout"]
 margin_top = 36.0
-margin_right = 86.0
+margin_right = 90.0
 margin_bottom = 50.0
+
+[node name="moist_label" type="Label" parent="UI/TileReadout"]
+margin_top = 54.0
+margin_right = 86.0
+margin_bottom = 68.0
 text = "Moisture:"
 
-[node name="moist_reading" type="Label" parent="CanvasLayer/TileReadout"]
+[node name="moist_reading" type="Label" parent="UI/TileReadout"]
 margin_left = 90.0
-margin_top = 36.0
+margin_top = 54.0
 margin_right = 90.0
-margin_bottom = 50.0
+margin_bottom = 68.0
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 margin_left = 539.61
@@ -294,5 +306,5 @@ cell_size = Vector2( 35, 35 )
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 script = ExtResource( 3 )
-[connection signal="pressed" from="CanvasLayer/GridContainer2/Button_Create" to="ViewportContainer/Mapviewport/TileMap" method="_on_Button_Create_pressed"]
-[connection signal="pressed" from="CanvasLayer/GridContainer2/ButtonSave" to="ViewportContainer/Mapviewport" method="_on_ButtonSave_pressed"]
+[connection signal="pressed" from="UI/GridContainer2/Button_Create" to="ViewportContainer/Mapviewport/TileMap" method="_on_Button_Create_pressed"]
+[connection signal="pressed" from="UI/GridContainer2/ButtonSave" to="ViewportContainer/Mapviewport" method="_on_ButtonSave_pressed"]

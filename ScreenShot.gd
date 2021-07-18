@@ -1,6 +1,6 @@
 extends Node
 
-onready var output_path = get_node("/root/MainScene/CanvasLayer/GridContainer/LineEdit_Path").get_text()
+onready var output_path = get_node("/root/MainScene/UI/MapOptions/LineEdit_Path").get_text()
 
 func _ready():
 	pass

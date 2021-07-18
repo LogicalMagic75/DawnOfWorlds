@@ -1,63 +1,71 @@
 extends TileMap
 
-var noise = OpenSimplexNoise.new()
-
+#Script vars
+var noise_raw =[]
+var noise_norm = []
+var raw_noise_max
 var temp = []
 var elevation = []
 var moisture =[]
 var r_lat =[]
+var UI_path = "/root/MainScene/UI/MapOptions"
 
-
-
+#start functions
 func _ready():
-	pass
+	randomize()
 
+func _on_Button_Create_pressed():
+	make_map()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("map_gen"):
-		clear()
 		make_map()
 
 func _input(event):
 	if Input.is_action_just_pressed("rightclick"):
 		var mouse_pos = event.position
 		var tile_pos = world_to_map(mouse_pos)
-		print (tile_pos)
 		var tilex: int = tile_pos.x
 		var tiley: int = tile_pos.y
-		get_node("/root/MainScene/CanvasLayer/TileReadout/elevation_reading").text = var2str(elevation[tilex][tiley])
-		get_node("/root/MainScene/CanvasLayer/TileReadout/temp_reading").text = var2str(temp[tilex][tiley])
-		get_node("/root/MainScene/CanvasLayer/TileReadout/moist_reading").text = var2str(moisture[tilex][tiley])
-
+		get_node("/root/MainScene/UI/TileReadout/elevation_reading").text = var2str(elevation[tilex][tiley])
+		get_node("/root/MainScene/UI/TileReadout/temp_reading").text = var2str(temp[tilex][tiley])
+		get_node("/root/MainScene/UI/TileReadout/moist_reading").text = var2str(moisture[tilex][tiley])
+		get_node("/root/MainScene/UI/TileReadout/noise_reading").text = var2str(noise_norm[tilex][tiley])
+		print ("Raw max: ",raw_noise_max)
+		var norm_noise_max = noise_norm.max().max()
+		print ("norm max: ",norm_noise_max)
 
 func make_map():
+	#clear tilemap
+	clear()
+	
 	#get vars
-	var map_size = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Size").value
-	var octaves = int(get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Octaves").value)
-	var period = float(get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Period").value)
-	var persistance = float(get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Persistance").value)
-	var lacunarity = float(get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Lacunarity").value)
-	var ElPower = int(get_node("/root/MainScene/CanvasLayer/GridContainer/optbutton_ElevPower").text)
-	var landsizeselected = get_node("/root/MainScene/CanvasLayer/GridContainer/ItemList_LandSize").selected
-	var climate = $"/root/MainScene/CanvasLayer/GridContainer/Climate_HSlider".value
-	var sealvl = $"/root/MainScene/CanvasLayer/GridContainer/SeaLevel_HSlider".value
+	var map_size = get_node(UI_path+"/SpinBox_Size").value
+	var octaves = int(get_node(UI_path+"/SpinBox_Octaves").value)
+	var period = float(get_node(UI_path+"/SpinBox_Period").value)
+	var persistance = float(get_node(UI_path+"/SpinBox_Persistance").value)
+	var lacunarity = float(get_node(UI_path+"/SpinBox_Lacunarity").value)
+	var ElPower = int(get_node(UI_path+"/optbutton_ElevPower").text)
+	var landsizeselected = get_node(UI_path+"/ItemList_LandSize").selected
+	var climate = get_node(UI_path+"/Climate_HSlider").value
+	var sealvl = get_node(UI_path+"/SeaLevel_HSlider").value
 	var landarray = [72, 29,14,7,3]
 	var landsize = landarray[landsizeselected] 
 	var latPtile = landsize/map_size
 	var latadj = (180-landsize)*climate
 	var MpT = round(latPtile*69)
-	get_node("/root/MainScene/CanvasLayer/GridContainer/MpT_Display").text = var2str(MpT)
+	get_node(UI_path+"/MpT_Display").text = var2str(MpT)
 
-	var nadjust = Expression.new()
-	nadjust.parse("x / 0.72", ["x"])
-
+	#set noise parameters
+	var noise = OpenSimplexNoise.new()
+	
 	noise.seed = randi()
 	noise.octaves = octaves
 	noise.period = period
 	noise.persistence = persistance
 	noise.lacunarity = lacunarity
 	
-		#set lattitude
+	#set lattitude
 	r_lat.resize(map_size)
 	for n in map_size:
 		r_lat[n] = []
@@ -65,17 +73,30 @@ func make_map():
 		for m in map_size:
 			r_lat[n][m] = deg2rad((m*latPtile-90)+latadj)
 	
-	
+	# get raw noise values
+	noise_raw.resize(map_size)
+	for n in map_size:
+		noise_raw[n] = []
+		noise_raw[n].resize(map_size)
+		for m in map_size:
+			noise_raw[n][m] = (noise.get_noise_2d(n,m))
+
+	# normalize noise values
+	raw_noise_max = noise_raw.max().max()
+	noise_norm.resize(map_size)
+	for n in map_size:
+		noise_norm[n] = []
+		noise_norm[n].resize(map_size)
+		for m in map_size:
+			noise_norm[n][m] = (noise_raw[n][m]/raw_noise_max)
+
 	# set elevation
 	elevation.resize(map_size)
 	for n in map_size:
 		elevation[n] = []
 		elevation[n].resize(map_size)
 		for m in map_size:
-			elevation[n][m] = nadjust.execute([noise.get_noise_2d(float(n), float(m))])
-	
-	
-
+			elevation[n][m] = pow(noise_norm[n][m], ElPower)
 
 	#set base temperatures
 	temp.resize(map_size)
@@ -83,7 +104,7 @@ func make_map():
 		temp[n] = []
 		temp[n].resize(map_size)
 		for m in map_size:
-			temp[n][m] = 30-(45*pow(sin(r_lat[n][m]),2)) - clamp(pow(elevation[n][m],ElPower)*100,0,100)
+			temp[n][m] = 30-(45*pow(sin(r_lat[n][m]),2)) - clamp(elevation[n][m]*40,0,100)
 
 	#set base moisture
 	moisture.resize(map_size)
@@ -117,8 +138,3 @@ func make_map():
 			elif temp[n][m] > 20 and moisture[n][m] > 25:
 				set_cell(n,m,9)
 			else: set_cell(n,m,2)
-
-
-func _on_Button_Create_pressed():
-	clear()
-	make_map()
