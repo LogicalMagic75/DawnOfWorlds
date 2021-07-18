@@ -7,10 +7,11 @@ var elevation = []
 var moisture =[]
 var r_lat =[]
 
-const ui_path = "/root/MainScene/CanvasLayer/GridContainer/"
+
 
 func _ready():
 	pass
+
 
 func _process(_delta):
 	if Input.is_action_just_pressed("map_gen"):
@@ -18,21 +19,28 @@ func _process(_delta):
 		make_map()
 
 func _input(event):
-	if event is InputEventMouseButton:
-		var mouse_pos = get_viewport().get_mouse_position()
-		var tile_pos = map_to_world(world_to_map(mouse_pos))
-		print(tile_pos)
+	if Input.is_action_just_pressed("rightclick"):
+		var mouse_pos = event.position
+		var tile_pos = world_to_map(mouse_pos)
+		print (tile_pos)
+		var tilex: int = tile_pos.x
+		var tiley: int = tile_pos.y
+		get_node("/root/MainScene/CanvasLayer/TileReadout/elevation_reading").text = var2str(elevation[tilex][tiley])
+		get_node("/root/MainScene/CanvasLayer/TileReadout/temp_reading").text = var2str(temp[tilex][tiley])
+		get_node("/root/MainScene/CanvasLayer/TileReadout/moist_reading").text = var2str(moisture[tilex][tiley])
+
 
 func make_map():
 	#get vars
 	var map_size = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Size").value
-	var octaves = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Octaves").value
-	var period = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Period").value
-	var persistance = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Persistance").value
-	var lacunarity = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Lacunarity").value
-	var ElPower = get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_ElevPower").value
+	var octaves = int(get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Octaves").value)
+	var period = float(get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Period").value)
+	var persistance = float(get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Persistance").value)
+	var lacunarity = float(get_node("/root/MainScene/CanvasLayer/GridContainer/SpinBox_Lacunarity").value)
+	var ElPower = int(get_node("/root/MainScene/CanvasLayer/GridContainer/optbutton_ElevPower").text)
 	var landsizeselected = get_node("/root/MainScene/CanvasLayer/GridContainer/ItemList_LandSize").selected
-	var climate = $"/root/MainScene/CanvasLayer/GridContainer/HSlider".value
+	var climate = $"/root/MainScene/CanvasLayer/GridContainer/Climate_HSlider".value
+	var sealvl = $"/root/MainScene/CanvasLayer/GridContainer/SeaLevel_HSlider".value
 	var landarray = [72, 29,14,7,3]
 	var landsize = landarray[landsizeselected] 
 	var latPtile = landsize/map_size
@@ -40,13 +48,14 @@ func make_map():
 	var MpT = round(latPtile*69)
 	get_node("/root/MainScene/CanvasLayer/GridContainer/MpT_Display").text = var2str(MpT)
 
+	var nadjust = Expression.new()
+	nadjust.parse("x / 0.72", ["x"])
 
 	noise.seed = randi()
 	noise.octaves = octaves
 	noise.period = period
 	noise.persistence = persistance
 	noise.lacunarity = lacunarity
-
 	
 		#set lattitude
 	r_lat.resize(map_size)
@@ -63,7 +72,9 @@ func make_map():
 		elevation[n] = []
 		elevation[n].resize(map_size)
 		for m in map_size:
-			elevation[n][m] = pow(noise.get_noise_2d(n, m),ElPower)*5
+			elevation[n][m] = nadjust.execute([noise.get_noise_2d(float(n), float(m))])
+	
+	
 
 
 	#set base temperatures
@@ -72,7 +83,7 @@ func make_map():
 		temp[n] = []
 		temp[n].resize(map_size)
 		for m in map_size:
-			temp[n][m] = 30-(45*pow(sin(r_lat[n][m]),2)) - (elevation[n][m]*20)
+			temp[n][m] = 30-(45*pow(sin(r_lat[n][m]),2)) - clamp(pow(elevation[n][m],ElPower)*100,0,100)
 
 	#set base moisture
 	moisture.resize(map_size)
@@ -80,16 +91,16 @@ func make_map():
 		moisture[n] = []
 		moisture[n].resize(map_size)
 		for m in map_size:
-			moisture[n][m] = (25*sin(6*r_lat[n][m]+1.65))+25 + (elevation[n][m]*1)
+			moisture[n][m] = (25*sin(6*r_lat[n][m]+1.65))+25 + clamp((elevation[n][m]*10),0,10)
 
 	#choose tiles
 	for n in range(0,map_size-1):
 		for m in range(0,map_size-1):
-			if temp[n][m] <-10:
+			if temp[n][m] <-14.7:
 				set_cell(n,m,0)
-			elif elevation[n][m] <= .05 and temp[n][m] <= -5:
+			elif elevation[n][m] <= sealvl and temp[n][m] <= -13:
 				set_cell(n,m,1)
-			elif elevation[n][m] <= .05 and temp[n][m] > -5:
+			elif elevation[n][m] <= sealvl and temp[n][m] > -13:
 				set_cell(n,m,2)
 			elif temp[n][m] <= -5:
 				set_cell(n,m,3)
